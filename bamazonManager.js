@@ -44,7 +44,7 @@ function managerNavigate() {
             choices: ["View Products", "View Low Inventory", "Add to Inventory", "Add New Product", "Quit"]
         })
         .then(function (answer) {
-            // based on their answer, either call the bid or the post functions
+            
             if (answer.navigation === "View Products") {
                 showProducts();
             } else if (answer.navigation === "View Low Inventory") {
@@ -132,7 +132,6 @@ function addInv() {
                         console.log(`Inventory has been updated
 ----------------------------------------`);
                         
-                        managerNavigate();
                 })
 
 
@@ -146,7 +145,6 @@ function addInv() {
 // //////////////////////////////////////////////////////////////////////////////////////////////
 
 function addProduct() {
-    // prompt for info about the item being put up for auction
     inquirer
         .prompt([
             {
@@ -163,23 +161,13 @@ function addProduct() {
                 name: "price",
                 type: "input",
                 message: "What is the price of this product?",
-                validate: function (value) {
-                    if (isNaN(value) === false) {
-                        return true;
-                    }
-                    return false;
-                }
+            
             },
             {
                 name: "quantity",
                 type: "input",
                 message: "How many are you adding to inventory?",
-                validate: function (value) {
-                    if (isNaN(value) === false) {
-                        return true;
-                    }
-                    return false;
-                }
+            
             }
         ])
         .then(function (answer) {
@@ -194,12 +182,13 @@ function addProduct() {
                 },
                 function (err) {
                     if (err) console.log(err);
-                    console.log("This item has been added to the inventory.");
-                    showProducts();
-                    managerNavigate();
+                    
 
                 }
+                
             );
+            console.log("This item has been added to the inventory.");
+                    showProducts();
         });
 }
 
