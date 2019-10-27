@@ -4,12 +4,12 @@ This is a CLI application built in Node.js that mimics an online store. "Custome
 
 # Usage
 
-This application utilizes a database maintained in MySql, and features the Inquirer NPM. In order to run this application successfully: 
+This application utilizes a database maintained in MySQL, and features the Inquirer NPM. In order to run this application successfully: 
 
 1. Download
 2. Run "npm install mysql inquirer".
 3. Update MySql connection (password).
-4. Open schema and seeds file in MySql and execute.
+4. Open schema and seeds file in MySQL and execute.
 5. Run either "bamazonCustomer.js" or "bamazonManager.js" in Node. 
 
 # Visuals
@@ -20,5 +20,5 @@ This application utilizes a database maintained in MySql, and features the Inqui
 
 # Project Status
 
-At the moment this is just a class assignment to demonstrate understanding of Node.js
+At the moment this is just a class assignment to demonstrate understanding of Node/MySQL.
 
