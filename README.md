@@ -14,6 +14,8 @@ This application utilizes a database maintained in MySql, and features the Inqui
 
 # Visuals
 
+![Bamazon](assets/Bamazon.webm "Bamazon example")
+
 
 
 # Project Status
