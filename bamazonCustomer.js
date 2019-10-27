@@ -23,13 +23,14 @@ const connection = mysql.createConnection({
 // Global Variables
 // //////////////////////////////////////////////////////////////////////////////////////////////
 
-const cartArr = [];
+// Array of items in customer's cart (objects)
+let cartArr = [];
 
 // //////////////////////////////////////////////////////////////////////////////////////////////
 // Upon connecting to the database, prompt user
 // //////////////////////////////////////////////////////////////////////////////////////////////
 
-connection.connect(function(err) {
+connection.connect(function (err) {
   if (err) throw err;
   customerNavigate();
 });
@@ -39,6 +40,8 @@ connection.connect(function(err) {
 // //////////////////////////////////////////////////////////////////////////////////////////////
 
 function customerNavigate() {
+  console.log
+(`-------------------------------------------`)
   inquirer
     .prompt({
       name: "navigation",
@@ -46,7 +49,7 @@ function customerNavigate() {
       message: "What would you like to do?",
       choices: ["Start Shopping", "View Cart", "Checkout", "Quit"]
     })
-    .then(function(answer) {
+    .then(function (answer) {
       // based on their answer, either call the bid or the post functions
       if (answer.navigation === "Start Shopping") {
         showProducts();
@@ -69,7 +72,7 @@ function customerNavigate() {
 
 function showProducts() {
   let query = "SELECT * FROM products";
-  connection.query(query, function(err, res) {
+  connection.query(query, function (err, res) {
     if (err) throw err;
     console.table(res);
   });
@@ -81,13 +84,13 @@ function showProducts() {
 
 function addToCart() {
   let query = "SELECT * FROM products";
-  connection.query(query, function(err, res) {
+  connection.query(query, function (err, res) {
     if (err) throw err;
     inquirer
       .prompt({
         name: "choice",
         type: "rawlist",
-        choices: function() {
+        choices: function () {
           var choiceArray = [];
           for (var i = 0; i < res.length; i++) {
             choiceArray.push(res[i].product_name);
@@ -96,7 +99,7 @@ function addToCart() {
         },
         message: "What item would you like purchase?"
       })
-      .then(function(answer) {
+      .then(function (answer) {
         let chosenItem;
         for (var i = 0; i < res.length; i++) {
           if (res[i].product_name === answer.choice) {
@@ -107,9 +110,9 @@ function addToCart() {
         if (chosenItem.stock_quantity >= 1) {
           connection.query(
             "UPDATE products SET stock_quantity = stock_quantity -1 WHERE item_id='" +
-              chosenItem.item_id +
-              "'",
-            function(error) {
+            chosenItem.item_id +
+            "'",
+            function (error) {
               if (error) console.log(error);
 
               console.log(`${chosenItem.product_name} added to cart!
@@ -135,13 +138,21 @@ function addToCart() {
 // //////////////////////////////////////////////////////////////////////////////////////////////
 
 function viewCart() {
+  if (cartArr.length < 1){
+    console.log(`Your cart is empty.
+------------------------------------`);
+    customerNavigate();
+  } 
+  
+  else {
   console.table(cartArr);
-  let totalPrice = cartArr.reduce(function(prev, cur) {
+  let totalPrice = cartArr.reduce(function (prev, cur) {
     return prev + cur.price;
   }, 0);
   console.log(`Your total is $${Math.round(totalPrice * 100) / 100}
 --------------------------------------------------------------`);
   customerNavigate();
+} 
 }
 
 // //////////////////////////////////////////////////////////////////////////////////////////////
@@ -149,7 +160,7 @@ function viewCart() {
 // //////////////////////////////////////////////////////////////////////////////////////////////
 
 function checkOut() {
-  let totalPrice = cartArr.reduce(function(prev, cur) {
+  let totalPrice = cartArr.reduce(function (prev, cur) {
     return prev + cur.price;
   }, 0);
   console.log(`Your total is $${Math.round(totalPrice * 100) / 100}
@@ -161,10 +172,11 @@ function checkOut() {
       default: true,
       message: "Would you like to complete your order?"
     })
-    .then(function(answer) {
+    .then(function (answer) {
       if (answer.confirm) {
         console.log(`Thank you for shopping with us!
 -----------------------------------------------------`);
+        cartArr = [];
         customerNavigate();
       } else {
         customerNavigate();
