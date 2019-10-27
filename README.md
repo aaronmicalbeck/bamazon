@@ -6,7 +6,7 @@ This is a CLI application built in Node.js that mimics an online store. "Custome
 
 This application utilizes a database maintained in MySQL, and features the Inquirer NPM. In order to run this application successfully: 
 
-1. Download
+1. Clone repository/Open in program of choice
 2. Run "npm install mysql inquirer".
 3. Update MySql connection (password).
 4. Open schema and seeds file in MySQL and execute.
@@ -15,8 +15,6 @@ This application utilizes a database maintained in MySQL, and features the Inqui
 # Visuals
 
 Video Example (https://drive.google.com/file/d/1Pfd877DxPj_kR0qYja3Z7m9H4l2tovHl/view)
-
-
 
 # Project Status
 
