@@ -155,7 +155,7 @@ function addProduct() {
             {
                 name: "department",
                 type: "input",
-                message: "What department would you like to file this product?"
+                message: "Under which department would you like to file this product?"
             },
             {
                 name: "price",
