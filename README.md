@@ -14,7 +14,7 @@ This application utilizes a database maintained in MySQL, and features the Inqui
 
 # Visuals
 
-(Please see video in "assets" folder)
+Video Example (https://drive.google.com/file/d/1Pfd877DxPj_kR0qYja3Z7m9H4l2tovHl/view)
 
 
 
