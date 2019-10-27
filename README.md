@@ -14,7 +14,7 @@ This application utilizes a database maintained in MySQL, and features the Inqui
 
 # Visuals
 
-![Bamazon](assets/Bamazon.webm "Bamazon example")
+(Please see video in "assets" folder)
 
 
 
