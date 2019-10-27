@@ -50,7 +50,6 @@ function customerNavigate() {
       choices: ["Start Shopping", "View Cart", "Checkout", "Quit"]
     })
     .then(function (answer) {
-      // based on their answer, either call the bid or the post functions
       if (answer.navigation === "Start Shopping") {
         showProducts();
         addToCart();
