@@ -47,7 +47,6 @@ function managerNavigate() {
             // based on their answer, either call the bid or the post functions
             if (answer.navigation === "View Products") {
                 showProducts();
-                managerNavigate();
             } else if (answer.navigation === "View Low Inventory") {
                 viewLowInv();
             } else if (answer.navigation === "Add to Inventory") {
@@ -67,11 +66,13 @@ function managerNavigate() {
 // //////////////////////////////////////////////////////////////////////////////////////////////
 
 function showProducts() {
+    console.log(`--------------------------------------------`);
     let query = "SELECT * FROM products";
     connection.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);
         console.log(`---------------------------------------------`);
+        managerNavigate();
     });
 }
 
@@ -80,6 +81,7 @@ function showProducts() {
 // //////////////////////////////////////////////////////////////////////////////////////////////
 
 function viewLowInv() {
+
     let query = "SELECT * FROM products WHERE stock_quantity < 5";
     connection.query(query, function (err, res) {
         if (err) throw err;
@@ -126,9 +128,10 @@ function addInv() {
                         chosenItem.item_id + "", function (err, res) {
                             if (err) console.log(err);
                         })
+                        showProducts();
                         console.log(`Inventory has been updated
 ----------------------------------------`);
-                        showProducts();
+                        
                         managerNavigate();
                 })
 
@@ -192,6 +195,7 @@ function addProduct() {
                 function (err) {
                     if (err) console.log(err);
                     console.log("This item has been added to the inventory.");
+                    showProducts();
                     managerNavigate();
 
                 }
